@@ -29,14 +29,14 @@ def calcular_puntos_de_seguridad(patterns, passwords):
     numeros = ["0","1","2","3","4","5","6","7","8","9"]
     puntos_de_seguridad = 0
     puntos_de_seguridad_arr = []
-    
+    #iterar sobre el arreglo con las contraseñas
     for i in passwords:
         puntos_de_seguridad = 0
         ciclo_minusculas = 0
         ciclo_mayusculas = 0
         ciclo_numeros = 0
         ciclo_caracteres_especiales = 0
-        
+        #iterar cada caracter de la contraseña para verificar si es una letra mayúscula, minúsculas, un numero, o un caracter especial
         for k in i:
             #Verificar la existencia de minúsculas en la contraseña
             if k in minusculas:
