@@ -1,13 +1,14 @@
 # Sebastián Pérez C.I: 31.748.129
 # Sjglys Xavier Luis C.I: 31.877.913
 
-
+#declaración de variables
 
 patrones = []
 
 contraseñas = []
 
 subcadena = ""
+
 
 def abrir_archivos(archivos, lista):
     #leer archivo
@@ -21,6 +22,7 @@ def abrir_archivos(archivos, lista):
 
 abrir_archivos("Patrones obvios de contraseña - Proyecto (Fundamentos de Programación SEM202415).txt",patrones)
 abrir_archivos("Contraseñas - Proyecto (Fundamentos de Programación SEM202415).txt",contraseñas)
+
 
 def calcular_puntos_de_seguridad(patterns, passwords):
     
@@ -74,9 +76,9 @@ def calcular_puntos_de_seguridad(patterns, passwords):
         
         #verificar si existen patrones obvios en la contraseña 
         for patron_obvio in patterns:
-            for caracter in range(len(clave)):
+            for i in range(len(clave)):
                 subcadena = ""
-                for j in range(caracter,len(clave)):
+                for j in range(i,len(clave)):
                     subcadena += clave[j]
                     if subcadena == patron_obvio:
                         puntos_de_seguridad -= 5
@@ -84,15 +86,14 @@ def calcular_puntos_de_seguridad(patterns, passwords):
 
         puntos_de_seguridad_arr += [puntos_de_seguridad + len(clave)]
 
-    return puntos_de_seguridad_arr
+    return puntos_de_seguridad_arr #retornar el arreglo con los puntos de seguridad de cada contraseña
 
 puntos_de_seguridad_arreglo = calcular_puntos_de_seguridad(patrones,contraseñas)
 
-print(puntos_de_seguridad_arreglo)
 
-def clasificar_contraseñas(puntos_de_seguridad_array):
+def clasificar_contraseñas(puntos_de_seguridad_array): #clasificar mediante categorías las contraseñas
     clasificacion_contraseñas = []
-    for puntos in puntos_de_seguridad_array:
+    for puntos in puntos_de_seguridad_array: #iterar cada elemento del arreglo donde se encuentran las puntos de seguridad de cada una de las contraseñas
         if puntos <= 15 :
             clasificacion_contraseñas += ["Debil"]
         elif puntos > 15 and puntos <= 20 :
@@ -104,13 +105,14 @@ def clasificar_contraseñas(puntos_de_seguridad_array):
         elif puntos > 100 :
             clasificacion_contraseñas += ["Impenetrable"]
     
-    return clasificacion_contraseñas
+    return clasificacion_contraseñas #retornar el arreglo con las categorías de seguridad de cada contraseña
 
 clasificacion_contraseñas = clasificar_contraseñas(puntos_de_seguridad_arreglo)
 
 print(clasificacion_contraseñas)
 
-def ordenamiento_burbuja(contraseñas_archivo,puntos_de_seguridad_ar,categoria_de_contraseñas):
+
+def ordenamiento_burbuja(contraseñas_archivo,puntos_de_seguridad_ar,categoria_de_contraseñas): #ordenamiento de mayor a menor
     for i in range(len(puntos_de_seguridad_ar)):
         for j in range(len(puntos_de_seguridad_ar) -1 -i):
             if puntos_de_seguridad_ar[j] < puntos_de_seguridad_ar[j + 1]:
@@ -127,15 +129,12 @@ def ordenamiento_burbuja(contraseñas_archivo,puntos_de_seguridad_ar,categoria_d
                 categoria_de_contraseñas[j] = categoria_de_contraseñas[j + 1]
                 categoria_de_contraseñas[j + 1] = aux
 
-ordenamiento_burbuja(contraseñas,puntos_de_seguridad_arreglo,clasificacion_contraseñas)
+ordenamiento_burbuja(contraseñas,puntos_de_seguridad_arreglo,clasificacion_contraseñas) 
 
-print(contraseñas)
-print(puntos_de_seguridad_arreglo)
-print(clasificacion_contraseñas)
 
 def exportar_archivo(passwords,cattegories,points):
     #crear nuevo archivo y escribir las contraseñas, categoría a la que pertenecen y los puntos de seguridad respectivamente
-    with open("contraseñas_ordenadas.txt","w") as archivo_final:
+    with open("contraseñas_ordenadas.txt","w") as archivo_final: #escritura de archivo
         archivo_final.write("          Contraseña          |          Categoría          |          Puntos de seguridad \n")
         for posicion in range(len(passwords)):
             archivo_final.write(f"{passwords[posicion]}  | {cattegories[posicion]}  |  {points[posicion]} \n"  )
