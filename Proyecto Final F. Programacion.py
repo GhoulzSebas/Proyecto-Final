@@ -19,8 +19,8 @@ def abrir_archivos(archivos, lista):
         
     
 
-abrir_archivos("patronesobvios.txt",patrones)
-abrir_archivos("contraseña.txt",contraseñas)
+abrir_archivos("Patrones obvios de contraseña - Proyecto (Fundamentos de Programación SEM202415).txt",patrones)
+abrir_archivos("Contraseñas - Proyecto (Fundamentos de Programación SEM202415).txt",contraseñas)
 
 def calcular_puntos_de_seguridad(patterns, passwords):
     
@@ -30,16 +30,16 @@ def calcular_puntos_de_seguridad(patterns, passwords):
     puntos_de_seguridad = 0
     puntos_de_seguridad_arr = []
     #iterar sobre el arreglo con las contraseñas
-    for i in passwords:
+    for clave in passwords:
         puntos_de_seguridad = 0
         ciclo_minusculas = 0
         ciclo_mayusculas = 0
         ciclo_numeros = 0
         ciclo_caracteres_especiales = 0
         #iterar cada caracter de la contraseña para verificar si es una letra mayúscula, minúsculas, un numero, o un caracter especial
-        for k in i:
+        for char in clave:
             #Verificar la existencia de minúsculas en la contraseña
-            if k in minusculas:
+            if char in minusculas:
                 if ciclo_minusculas == 0:
                     
                     puntos_de_seguridad += 1
@@ -48,7 +48,7 @@ def calcular_puntos_de_seguridad(patterns, passwords):
                 else: 
                     continue
             #Verificar la existencia de mayúsculas en la contraseña
-            elif k in mayusculas:
+            elif char in mayusculas:
                 if ciclo_mayusculas == 0:
                     puntos_de_seguridad += 1
                     ciclo_mayusculas = 1
@@ -57,7 +57,7 @@ def calcular_puntos_de_seguridad(patterns, passwords):
                     continue
             
             #Verificar la existencia de números en la contraseña
-            elif k in numeros:
+            elif char in numeros:
                 if ciclo_numeros == 0:
                     puntos_de_seguridad += 1
                     ciclo_numeros = 1
@@ -74,15 +74,15 @@ def calcular_puntos_de_seguridad(patterns, passwords):
         
         #verificar si existen patrones obvios en la contraseña 
         for patron_obvio in patterns:
-            for caracter in range(len(i)):
+            for caracter in range(len(clave)):
                 subcadena = ""
-                for j in range(caracter,len(i)):
-                    subcadena += i[j]
+                for j in range(caracter,len(clave)):
+                    subcadena += clave[j]
                     if subcadena == patron_obvio:
                         puntos_de_seguridad -= 5
         
 
-        puntos_de_seguridad_arr += [puntos_de_seguridad + len(i)]
+        puntos_de_seguridad_arr += [puntos_de_seguridad + len(clave)]
 
     return puntos_de_seguridad_arr
 
